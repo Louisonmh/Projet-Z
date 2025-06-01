@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet Z - Code 1</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    input, button {
+      font-size: 1.2em;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 1.4em;
+      color: #2ecc71;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔐 Entrez le code</h1>
+  <input type="text" id="codeInput" placeholder="Ex: CUBE-42" />
+  <br>
+  <button onclick="checkCode()">Valider</button>
+  <div id="result"></div>
+
+  <script>
+    const correctCode = "ZOE-143";
+
+    function checkCode() {
+      const input = document.getElementById("codeInput").value.trim();
+      const result = document.getElementById("result");
+
+      if (input.toUpperCase() === correctCode) {
+        result.innerHTML = "✅ Bien joué ! Voici l’indice suivant :<br><br><strong>Va voir dans les reflets de l’eau...</strong>";
+      } else {
+        result.innerHTML = "❌ Code incorrect. Essaie encore.";
+      }
+    }
+  </script>
+</body>
+</html>
