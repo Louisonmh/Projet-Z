@@ -43,9 +43,18 @@
     <div id="result2"></div>
   </div>
 
+  <div id="step3" class="hidden">
+    <p>https://thejigsawpuzzles.com/User-Albums/louison_maheegmail_com/engime-jigsaw-puzzle<br>bas bas droite droite bas bas 9*gauche bas</p>
+    <input type="text" id="codeInput2" placeholder="Code 3">
+    <br>
+    <button onclick="checkCode3()">Valider</button>
+    <div id="result2"></div>
+  </div>
+
   <script>
     const correctCode1 = "0915";
-    const correctCode2 = "JOTZERP";
+    const correctCode2 = "jotzerp";
+    const correctCode3 = "9012";
 
     function checkCode() {
       const input = document.getElementById("codeInput").value.trim();
@@ -63,8 +72,20 @@
       const input2 = document.getElementById("codeInput2").value.trim().toLowerCase();
       const result2 = document.getElementById("result2");
 
-      if (input2 === correctCode2) {
+      if (input2.toLowerCase() === correctCode2.toLowerCase()) {
         result2.innerHTML = "🎉 Bien joué ! ";
+        document.getElementById("step3").classList.remove("hidden");
+      } else {
+        result2.innerHTML = "❌ Toujours pas… ";
+      }
+    }
+
+    function checkCode3() {
+      const input3 = document.getElementById("codeInput3").value.trim().toLowerCase();
+      const result3 = document.getElementById("result3");
+
+      if (input3 === correctCode3)) {
+        result3.innerHTML = "🎉 Bien joué ! ";
         // Tu peux ici ajouter une redirection ou révéler un autre indice
       } else {
         result2.innerHTML = "❌ Toujours pas… ";
