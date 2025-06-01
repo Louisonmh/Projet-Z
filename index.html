@@ -16,32 +16,58 @@
       padding: 10px;
       margin-top: 20px;
     }
-    #result {
+    #result, #result2 {
       margin-top: 30px;
       font-size: 1.4em;
       color: #42f57b;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <h1>🔍 Projet Z</h1>
   <p>Entre le code pour continuer l’enquête :</p>
-  <input type="text" id="codeInput" placeholder="Ex : ZOE-143" />
+  <input type="text" id="codeInput" placeholder="Code 1">
   <br>
   <button onclick="checkCode()">Valider</button>
   <div id="result"></div>
 
+  <!-- Étape 2, cachée au début -->
+  <div id="step2" class="hidden">
+    <p>Tu as deja tout sous les yeux</p>
+    <input type="text" id="codeInput2" placeholder="Code 2">
+    <br>
+    <button onclick="checkCode2()">Valider</button>
+    <div id="result2"></div>
+  </div>
+
   <script>
-    const correctCode = "ZOE-143";
+    const correctCode1 = "0915";
+    const correctCode2 = "JOTZERP";
 
     function checkCode() {
       const input = document.getElementById("codeInput").value.trim();
       const result = document.getElementById("result");
 
-      if (input.toUpperCase() === correctCode) {
-        result.innerHTML = "✅ Bien joué ! Voici l’indice suivant :<br><strong>Va voir dans les reflets de l’eau…</strong>";
+      if (input === correctCode1) {
+        result.innerHTML = "✅ Bien joué !";
+        document.getElementById("step2").classList.remove("hidden");
       } else {
-        result.innerHTML = "❌ Code incorrect. Essaie encore.";
+        result.innerHTML = "❌ T’es trop nul, essaye encore !";
+      }
+    }
+
+    function checkCode2() {
+      const input2 = document.getElementById("codeInput2").value.trim().toLowerCase();
+      const result2 = document.getElementById("result2");
+
+      if (input2 === correctCode2) {
+        result2.innerHTML = "🎉 Bien joué ! ";
+        // Tu peux ici ajouter une redirection ou révéler un autre indice
+      } else {
+        result2.innerHTML = "❌ Toujours pas… ";
       }
     }
   </script>
