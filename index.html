@@ -7,6 +7,29 @@
   <title>Connexion</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+<script>
+  // Ta config Firebase (celle récupérée plus haut)
+const firebaseConfig = {
+  apiKey: "AIzaSyDed2-9Ehd456Tp0bxR9DqHInD7JfGsZis",
+  authDomain: "projet-z-66d5b.firebaseapp.com",
+  projectId: "projet-z-66d5b",
+  storageBucket: "projet-z-66d5b.firebasestorage.app",
+  messagingSenderId: "997922014696",
+  appId: "1:997922014696:web:53a2b551fc88b6651ed05d",
+  measurementId: "G-XPQQH7W14W"
+};
+
+  // Initialiser Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Référence à Firestore
+  const db = firebase.firestore();
+</script>
+
 <body>
   <h1>Connexion</h1>
   <form id="login-form" class="content-box">
