@@ -112,3 +112,34 @@ if (document.getElementById("targetUser")) {
 function startLevel(level) {
   window.location.href = `niveau${level}.html`;
 }
+
+window.resetLevel = function() {
+  const target = document.getElementById("targetUser").value;
+  const msg = document.getElementById("adminMsg");
+
+  if (!users[target]) {
+    msg.textContent = "Utilisateur inconnu.";
+    return;
+  }
+
+  const progressData = JSON.parse(localStorage.getItem(progressStorageKey)) || {};
+  progressData[target] = 1;
+  localStorage.setItem(progressStorageKey, JSON.stringify(progressData));
+  msg.textContent = `Niveau 1 réinitialisé pour ${target}.`;
+};
+
+window.resetAllLevels = function() {
+  const target = document.getElementById("targetUser").value;
+  const msg = document.getElementById("adminMsg");
+
+  if (!users[target]) {
+    msg.textContent = "Utilisateur inconnu.";
+    return;
+  }
+
+  const progressData = JSON.parse(localStorage.getItem(progressStorageKey)) || {};
+  delete progressData[target];
+  localStorage.setItem(progressStorageKey, JSON.stringify(progressData));
+  msg.textContent = `Toute la progression de ${target} a été réinitialisée.`;
+};
+
