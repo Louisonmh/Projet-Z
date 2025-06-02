@@ -1,7 +1,7 @@
 <!-- script.js -->
 const users = {
-  "louison": "062455",
-  "sexyzozo": "090304"
+  "louison": "password1",
+  "pote": "password2"
 };
 
 const coinsStorageKey = "coins";
@@ -88,6 +88,25 @@ if (document.getElementById("timer")) {
     message.textContent = "Niveau validé ! Retour à l'accueil...";
     setTimeout(() => window.location.href = "home.html", 2000);
   };
+}
+
+// Admin handler
+if (document.getElementById("targetUser")) {
+  window.addCoinsToUser = function() {
+    const target = document.getElementById("targetUser").value;
+    const amount = parseInt(document.getElementById("coinAmount").value);
+    const msg = document.getElementById("adminMsg");
+
+    if (!users[target]) {
+      msg.textContent = "Utilisateur inconnu.";
+      return;
+    }
+
+    const coinsData = JSON.parse(localStorage.getItem(coinsStorageKey)) || {};
+    coinsData[target] = (coinsData[target] || 0) + amount;
+    localStorage.setItem(coinsStorageKey, JSON.stringify(coinsData));
+    msg.textContent = `Ajouté ${amount} coins à ${target}.`;
+  }
 }
 
 function startLevel(level) {
