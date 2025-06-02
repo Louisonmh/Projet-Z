@@ -7,6 +7,13 @@
   <title>Admin</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<script>
+  const currentUser = localStorage.getItem("user");
+  if (currentUser !== "louison") {
+    alert("Accès réservé à l'administrateur.");
+    window.location.href = "home.html";
+  }
+</script>
 <body>
   <h1>Page Admin</h1>
   <p>Utilisateur : <input type="text" id="targetUser" placeholder="Nom d'utilisateur"></p>
