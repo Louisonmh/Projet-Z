@@ -131,3 +131,67 @@ if (document.getElementById("targetUser")) {
 function startLevel(level) {
   window.location.href = `niveau${level}.html`;
 }
+
+if (document.getElementById("adminUser")) {
+  const currentUser = localStorage.getItem("user");
+  const panel = document.getElementById("adminPanel");
+  document.getElementById("adminUser").textContent = `Connecté en tant que : ${currentUser}`;
+
+  if (currentUser !== "louison") {
+    panel.innerHTML = "<p>Accès refusé. Page réservée à Louison.</p>";
+  } else {
+    panel.style.display = "block";
+  }
+
+  window.addCoinsToUser = function () {
+    const target = document.getElementById("targetUser").value;
+    const amount = parseInt(document.getElementById("coinAmount").value);
+    const msg = document.getElementById("adminMsg");
+
+    if (!users[target]) {
+      msg.textContent = "Utilisateur inconnu.";
+      return;
+    }
+
+    const coinsData = JSON.parse(localStorage.getItem(coinsStorageKey)) || {};
+    coinsData[target] = (coinsData[target] || 0) + amount;
+    localStorage.setItem(coinsStorageKey, JSON.stringify(coinsData));
+    msg.textContent = `Ajouté ${amount} coins à ${target}.`;
+  };
+
+  window.resetLevel = function () {
+    const user = document.getElementById("resetUser").value;
+    const level = parseInt(document.getElementById("resetLevel").value);
+    const msg = document.getElementById("adminMsg");
+
+    if (!users[user]) {
+      msg.textContent = "Utilisateur inconnu.";
+      return;
+    }
+
+    const progressData = JSON.parse(localStorage.getItem(progressStorageKey)) || {};
+    if (progressData[user] > level) {
+      progressData[user] = level;
+      localStorage.setItem(progressStorageKey, JSON.stringify(progressData));
+      msg.textContent = `Le niveau ${level} a été restauré pour ${user}.`;
+    } else {
+      msg.textContent = `Aucune progression à réinitialiser pour ce niveau.`;
+    }
+  };
+
+  window.resetAllProgress = function () {
+    const user = document.getElementById("resetAllUser").value;
+    const msg = document.getElementById("adminMsg");
+
+    if (!users[user]) {
+      msg.textContent = "Utilisateur inconnu.";
+      return;
+    }
+
+    const progressData = JSON.parse(localStorage.getItem(progressStorageKey)) || {};
+    progressData[user] = 1;
+    localStorage.setItem(progressStorageKey, JSON.stringify(progressData));
+    msg.textContent = `Progression de ${user} remise à zéro.`;
+  };
+}
+
