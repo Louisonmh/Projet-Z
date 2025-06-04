@@ -7,15 +7,95 @@
   <title>Connexion</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<script type="module" src="firebase.js"></script>
+<!-- Firebase SDKs -->
+<script type="module">
+  // Import via CDN les SDK nécessaires
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Ton config Firebase (copie depuis ton projet Firebase)
+const firebaseConfig = {
+  apiKey: "AIzaSyDed2-9Ehd456Tp0bxR9DqHInD7JfGsZis",
+  authDomain: "projet-z-66d5b.firebaseapp.com",
+  databaseURL: "https://projet-z-66d5b-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "projet-z-66d5b",
+  storageBucket: "projet-z-66d5b.firebasestorage.app",
+  messagingSenderId: "997922014696",
+  appId: "1:997922014696:web:53a2b551fc88b6651ed05d",
+  measurementId: "G-XPQQH7W14W"
+};
+
+  // Initialise Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // 🔁 Auth state (utile pour afficher les bonnes pages)
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      console.log("Connecté :", user.email);
+      // Rediriger ou charger contenu privé
+    } else {
+      console.log("Utilisateur déconnecté");
+      // Rediriger vers page login
+    }
+  });
+
+  // 🔐 Fonctions de connexion / inscription
+  window.signIn = async function(email, password) {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Connecté !");
+    } catch (error) {
+      alert("Erreur de connexion : " + error.message);
+    }
+  }
+
+  window.signUp = async function(email, password) {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Compte créé !");
+    } catch (error) {
+      alert("Erreur d'inscription : " + error.message);
+    }
+  }
+
+  window.logout = async function() {
+    await signOut(auth);
+    alert("Déconnecté !");
+  }
+
+  // 🔄 Exemple d'accès à la base Firestore
+  window.getProgression = async function() {
+    const user = auth.currentUser;
+    if (!user) return;
+    const ref = doc(db, "users", user.uid);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      const data = snap.data();
+      console.log("Progression :", data.progress);
+    } else {
+      await setDoc(ref, { progress: 0, coins: 0 });
+      console.log("Profil initialisé");
+    }
+  }
+
+  window.setProgression = async function(level, coins) {
+    const user = auth.currentUser;
+    if (!user) return;
+    const ref = doc(db, "users", user.uid);
+    await updateDoc(ref, { progress: level, coins: coins });
+  }
+</script>
 <body>
-  <h1>Connexion</h1>
-  <form id="login-form" class="content-box">
-    <input type="text" id="username" placeholder="Identifiant" required><br>
-    <input type="password" id="password" placeholder="Mot de passe" required><br>
-    <button type="submit">Se connecter</button>
-  </form>
-  <p id="error-msg" style="color: red;"></p>
-  <script src="script.js"></script>
+  <h2>Connexion</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Mot de passe">
+  <button onclick="signIn(email.value, password.value)">Se connecter</button>
+  <button onclick="signUp(email.value, password.value)">Créer un compte</button>
+  <button onclick="logout()">Se déconnecter</button>
+  <button onclick="getProgression()">Afficher ma progression</button>
+  <button onclick="setProgression(2, 100)">Définir niveau 2, 100 pièces</button>
 </body>
 </html>
