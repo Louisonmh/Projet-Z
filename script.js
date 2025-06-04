@@ -90,6 +90,53 @@ if (document.getElementById("timer")) {
   };
 }
 
+// Niveau 2 handler
+if (document.title === "Niveau 2") {
+  const username = localStorage.getItem("user");
+  if (!username) window.location.href = "index.html";
+  let seconds = 60;
+  const timerDisplay = document.getElementById("timer");
+  const message = document.getElementById("message");
+
+  function updateCoinsDisplay() {
+    const coins = JSON.parse(localStorage.getItem(coinsStorageKey))[username];
+    document.getElementById("coins").textContent = coins;
+  }
+
+  updateCoinsDisplay();
+
+  const interval = setInterval(() => {
+    seconds--;
+    timerDisplay.textContent = seconds;
+    if (seconds <= 0) {
+      clearInterval(interval);
+      message.textContent = "Temps écoulé !";
+    }
+  }, 1000);
+
+  window.buyTime = function() {
+    const coinsData = JSON.parse(localStorage.getItem(coinsStorageKey));
+    if (coinsData[username] >= 5) {
+      coinsData[username] -= 5;
+      seconds += 30;
+      localStorage.setItem(coinsStorageKey, JSON.stringify(coinsData));
+      updateCoinsDisplay();
+    } else {
+      message.textContent = "Pas assez de coins !";
+    }
+  };
+
+  window.validateLevel2 = function() {
+    clearInterval(interval);
+    const progressData = JSON.parse(localStorage.getItem(progressStorageKey));
+    progressData[username] = 3;
+    localStorage.setItem(progressStorageKey, JSON.stringify(progressData));
+    message.textContent = "Niveau 2 validé ! Retour à l'accueil...";
+    setTimeout(() => window.location.href = "home.html", 2000);
+  };
+}
+
+
 // Admin handler
 if (document.getElementById("targetUser")) {
   window.addCoinsToUser = function() {
