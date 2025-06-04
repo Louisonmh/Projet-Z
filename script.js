@@ -40,6 +40,9 @@ if (document.getElementById("user")) {
 
   const progress = JSON.parse(localStorage.getItem(progressStorageKey))[username];
   if (progress >= 2) document.getElementById("level2").disabled = false;
+  if (progress >= 3) document.getElementById("level3").disabled = false;
+  if (progress >= 4) document.getElementById("level4").disabled = false;
+  if (progress >= 5) document.getElementById("level5").disabled = false;
 }
 
 // Niveau 1 handler
