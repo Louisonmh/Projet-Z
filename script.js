@@ -135,6 +135,8 @@ if (document.title === "Niveau 2") {
     clearInterval(interval);
     const progressData = JSON.parse(localStorage.getItem(progressStorageKey));
     progressData[username] = 3;
+    const coinsData = JSON.parse(localStorage.getItem(coinsStorageKey));
+    coinsData[username] += 2;
     localStorage.setItem(progressStorageKey, JSON.stringify(progressData));
     message.textContent = "Niveau 2 validé ! Retour à l'accueil...";
     setTimeout(() => window.location.href = "home.html", 2000);
