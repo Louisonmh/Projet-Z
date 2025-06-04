@@ -1,17 +1,17 @@
-<!-- Firebase -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+// firebase.js
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyDed2-9Ehd456Tp0bxR9DqHInD7JfGsZis",
-  authDomain: "projet-z-66d5b.firebaseapp.com",
-  projectId: "projet-z-66d5b",
-  storageBucket: "projet-z-66d5b.firebasestorage.app",
-  messagingSenderId: "997922014696",
-  appId: "1:997922014696:web:53a2b551fc88b6651ed05d",
-  measurementId: "G-XPQQH7W14W"
+const firebaseConfig = {
+  apiKey: "TA_CLE_API",
+  authDomain: "TON-PROJET.firebaseapp.com",
+  projectId: "TON-PROJET",
+  storageBucket: "TON-PROJET.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdefghij"
 };
-  const app = initializeApp(firebaseConfig);
-  window.db = getFirestore(app);
-</script>
+
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
