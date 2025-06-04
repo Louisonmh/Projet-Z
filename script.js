@@ -87,6 +87,8 @@ if (document.getElementById("timer")) {
     if (progressData[username] < 2) {
       progressData[username] = 2;
       localStorage.setItem(progressStorageKey, JSON.stringify(progressData));
+      const coinsData = JSON.parse(localStorage.getItem(coinsStorageKey));
+      coinsData[username] += 2;
     }
     message.textContent = "Niveau validé ! Retour à l'accueil...";
     setTimeout(() => window.location.href = "home.html", 2000);
