@@ -6,6 +6,7 @@ const users = {
 
 const coinsStorageKey = "coins";
 const progressStorageKey = "progress";
+const failedLevelsKey = "failedLevels";
 
 // Login handler
 if (document.getElementById("login-form")) {
@@ -54,6 +55,20 @@ if (document.getElementById("user")) {
     level2Button.textContent = "Niveau 1 (déjà terminé)";
     level1Button.textContent = "Niveau 1 (déjà terminé)";
   }
+
+  const failedData = JSON.parse(localStorage.getItem(failedLevelsKey)) || {};
+
+if (failedData[username]?.includes(1)) {
+  const level1Btn = document.getElementById("level1");
+  level1Btn.disabled = true;
+  level1Btn.textContent = "Niveau 1 (échoué)";
+}
+if (failedData[username]?.includes(2)) {
+  const level2Btn = document.getElementById("level2");
+  level2Btn.disabled = true;
+  level2Btn.textContent = "Niveau 2 (échoué)";
+}
+
 
 }
 
