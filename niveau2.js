@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const username = getCurrentUser();
   if (!username) window.location.href = "index.html";
   
-  let seconds = 60;
+  let seconds = 180;
   const timerDisplay = document.getElementById("timer");
   const message = document.getElementById("message");
   
