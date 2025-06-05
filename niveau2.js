@@ -10,15 +10,18 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("coins").textContent = getCoins(username);
   
   // Timer
-  const interval = setInterval(() => {
-    seconds--;
-    timerDisplay.textContent = seconds;
-    
-    if (seconds <= 0) {
-      clearInterval(interval);
-      message.textContent = "Temps écoulé !";
-    }
-  }, 1000);
+const interval = setInterval(() => {
+  seconds--;
+  timerDisplay.textContent = seconds;
+  
+  if (seconds <= 0) {
+    clearInterval(interval);
+    message.textContent = "Temps écoulé ! Retour à l'accueil...";
+    // Empêcher de rejouer le niveau en mettant à jour la progression
+    updateProgress(username, 2); // On reste au niveau 2 (non complété)
+    setTimeout(() => window.location.href = "home.html", 2000);
+  }
+}, 1000);
   
   // Achat de temps
   window.buyTime = function() {
@@ -41,4 +44,31 @@ document.addEventListener('DOMContentLoaded', function() {
     message.textContent = "Niveau validé ! +3 coins";
     setTimeout(() => window.location.href = "home.html", 2000);
   };
+
+  window.verifierReponse = function() {
+  const reponse = parseInt(document.getElementById("reponse").value);
+  const progress = getProgress(username);
+  
+  // Vérifie si le niveau est déjà complété
+  if (progress > 2) {
+    message.textContent = "Vous avez déjà complété ce niveau !";
+    message.style.color = "orange";
+    return;
+  }
+  
+  if (reponse === 6) {
+    clearInterval(interval);
+    // Marque le niveau comme complété (niveau suivant = 3)
+    updateProgress(username, 3);
+    updateCoins(username, 3);
+    
+    message.textContent = "Niveau validé ! +3 coins";
+    message.style.color = "green";
+    
+    setTimeout(() => window.location.href = "home.html", 2000);
+  } else {
+    message.textContent = "Réponse incorrecte, essayez encore !";
+    message.style.color = "red";
+  }
+};
 });
