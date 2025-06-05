@@ -92,8 +92,18 @@ if (document.getElementById("timer")) {
     timerDisplay.textContent = seconds;
     if (seconds <= 0) {
       clearInterval(interval);
-      message.textContent = "Temps écoulé !";
+      message.textContent = "Temps écoulé ! Niveau échoué.";
+
+      const failedData = JSON.parse(localStorage.getItem(failedLevelsKey)) || {};
+      if (!failedData[username]) failedData[username] = [];
+      if (!failedData[username].includes(1)) {
+        failedData[username].push(1);
+        localStorage.setItem(failedLevelsKey, JSON.stringify(failedData));
+      }
+
+      setTimeout(() => window.location.href = "home.html", 2000);
     }
+
   }, 1000);
 
   window.buyTime = function() {
@@ -142,8 +152,18 @@ if (document.title === "Niveau 2") {
     timerDisplay.textContent = seconds;
     if (seconds <= 0) {
       clearInterval(interval);
-      message.textContent = "Temps écoulé !";
+      message.textContent = "Temps écoulé ! Niveau échoué.";
+
+      const failedData = JSON.parse(localStorage.getItem(failedLevelsKey)) || {};
+      if (!failedData[username]) failedData[username] = [];
+      if (!failedData[username].includes(2)) {
+        failedData[username].push(2);
+        localStorage.setItem(failedLevelsKey, JSON.stringify(failedData));
+      }
+
+      setTimeout(() => window.location.href = "home.html", 2000);
     }
+
   }, 1000);
 
   window.buyTime = function() {
