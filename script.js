@@ -93,3 +93,30 @@ if (document.getElementById("user")) {
 function startLevel(level) {
   window.location.href = `niveau${level}.html`;
 }
+
+// Nouvelle clé de stockage
+const levelsStatusKey = "levelsStatus";
+
+// Marquer un niveau comme échoué
+function markLevelAsFailed(username, level) {
+  const status = JSON.parse(localStorage.getItem(levelsStatusKey)) || {};
+  if (!status[username]) status[username] = {};
+  status[username][level] = 'failed';
+  localStorage.setItem(levelsStatusKey, JSON.stringify(status));
+}
+
+// Marquer un niveau comme complété
+function markLevelAsCompleted(username, level) {
+  const status = JSON.parse(localStorage.getItem(levelsStatusKey)) || {};
+  if (!status[username]) status[username] = {};
+  status[username][level] = 'completed';
+  localStorage.setItem(levelsStatusKey, JSON.stringify(status));
+  // Met aussi à jour la progression globale
+  updateProgress(username, level + 1);
+}
+
+// Obtenir le statut d'un niveau
+function getLevelStatus(username, level) {
+  const status = JSON.parse(localStorage.getItem(levelsStatusKey)) || {};
+  return status[username]?.[level] || 'unattempted';
+}
