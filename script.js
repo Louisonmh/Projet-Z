@@ -64,6 +64,7 @@ if (document.getElementById("login-form")) {
 }
 
 // Gestion de l'accueil
+// Dans la partie "Gestion de l'accueil"
 if (document.getElementById("user")) {
   const username = getCurrentUser();
   if (!username) window.location.href = "index.html";
@@ -71,11 +72,21 @@ if (document.getElementById("user")) {
   document.getElementById("user").textContent = username;
   document.getElementById("coins").textContent = getCoins(username);
 
-  // Active les boutons des niveaux débloqués
   const progress = getProgress(username);
-  for (let i = 2; i <= 5; i++) {
+  
+  // Désactive les boutons selon la progression
+  for (let i = 1; i <= 5; i++) {
     const btn = document.getElementById(`level${i}`);
-    if (btn) btn.disabled = progress < i;
+    if (btn) {
+      // Si le niveau est déjà complété OU si c'est le niveau suivant
+      btn.disabled = progress > i || (progress < i && i > 1);
+      
+      // Change le texte si complété
+      if (progress > i) {
+        btn.textContent = `Niveau ${i} ✓`;
+        btn.style.opacity = "0.7";
+      }
+    }
   }
 }
 
