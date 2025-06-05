@@ -39,10 +39,22 @@ if (document.getElementById("user")) {
   document.getElementById("coins").textContent = coins;
 
   const progress = JSON.parse(localStorage.getItem(progressStorageKey))[username];
-  if (progress >= 2) document.getElementById("level2").disabled = false;
-  if (progress >= 3) document.getElementById("level3").disabled = false;
-  if (progress >= 4) document.getElementById("level4").disabled = false;
-  if (progress >= 5) document.getElementById("level5").disabled = false;
+  const level1Button = document.getElementById("level1");
+  const level2Button = document.getElementById("level2");
+  const level3Button = document.getElementById("level3");
+  if (progress >= 2) {
+    level2Button.disabled = false;
+    level1Button.disabled = true; // désactiver le niveau 1
+    level1Button.textContent = "Niveau 1 (déjà terminé)";
+  }
+  if (progress >= 3) {
+    level3Button.disabled = false;
+    level2Button.disabled = true;
+    level1Button.disabled = true; // désactiver le niveau 1
+    level2Button.textContent = "Niveau 1 (déjà terminé)";
+    level1Button.textContent = "Niveau 1 (déjà terminé)";
+  }
+
 }
 
 // Niveau 1 handler
