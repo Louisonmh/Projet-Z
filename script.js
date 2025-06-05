@@ -94,7 +94,9 @@ if (document.getElementById("user")) {
 }
 
 function startLevel(level) {
-  window.location.href = `niveau${level}.html`;
+  if (level === 1) window.location.href = "niveau1.html";
+  else if (level === 2) window.location.href = "niveau2.html";
+  else if (level === 3) window.location.href = "niveau3.html";
 }
 
 // Nouvelle clé de stockage
