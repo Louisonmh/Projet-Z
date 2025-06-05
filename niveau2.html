@@ -1,3 +1,4 @@
+<!-- niveau2.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,12 +9,21 @@
 </head>
 <body>
   <h1>Niveau 2</h1>
-  <p>Temps restant : <span id="timer">60</span> secondes</p>
+  <p>Temps restant : <span id="timer">180</span> secondes</p>
   <p>Coins : <span id="coins"></span></p>
   <button onclick="buyTime()">Acheter 30s (5 coins)</button>
   <br><br>
-  <button onclick="validateLevel2()">Valider le niveau</button>
+  
+  <!-- Ajoute cette partie pour l'énigme -->
+  <div class="enigme">
+    <img src="images/enigme2.jpg" alt="Énigme du niveau 2" class="enigme-image">
+    <p>Combien il y a de traingle ?</p>
+    <input type="number" id="reponse" placeholder="Votre réponse">
+    <button onclick="verifierReponse()">Valider</button>
+  </div>
+  
   <p id="message"></p>
   <script src="script.js"></script>
+  <script src="niveau2.js"></script>
 </body>
 </html>
