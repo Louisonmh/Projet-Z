@@ -64,7 +64,7 @@ if (document.getElementById("login-form")) {
 }
 
 // Gestion de l'accueil
-// Dans la partie "Gestion de l'accueil"
+// Dans la partie "Gestion de l'accueil" de script.js
 if (document.getElementById("user")) {
   const username = getCurrentUser();
   if (!username) window.location.href = "index.html";
@@ -74,18 +74,21 @@ if (document.getElementById("user")) {
 
   const progress = getProgress(username);
   
-  // Désactive les boutons selon la progression
+  // Gestion des boutons de niveau
   for (let i = 1; i <= 5; i++) {
     const btn = document.getElementById(`level${i}`);
     if (btn) {
-      // Si le niveau est déjà complété OU si c'est le niveau suivant
-      btn.disabled = progress > i || (progress < i && i > 1);
+      const status = getLevelStatus(username, i);
       
-      // Change le texte si complété
-      if (progress > i) {
-        btn.textContent = `Niveau ${i} ✓`;
-        btn.style.opacity = "0.7";
-      }
+      // Applique les classes selon le statut
+      btn.classList.remove('completed', 'failed');
+      if (status === 'completed') btn.classList.add('completed');
+      if (status === 'failed') btn.classList.add('failed');
+      
+      // Désactive selon la progression et le statut
+      btn.disabled = (status === 'failed') || 
+                    (i > progress && i > 1) || 
+                    (status === 'completed');
     }
   }
 }
