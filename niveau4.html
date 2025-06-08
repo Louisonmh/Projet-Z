@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Niveau 4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Niveau 3</h1>
+  <p>Temps restant : <span id="timer">3600</span> secondes</p>
+  <p>Coins : <span id="coins"></span></p>
+  <button onclick="buyTime()">Acheter 60s (5 coins)</button>
+  <br><br>
+  
+  <div class="enigme">
+    <img src="enigme3.png" alt="Énigme du niveau 3" class="enigme-image">
+    <p>Combien il y a de traingle ?</p>
+    <input type="number" id="reponse" placeholder="Votre réponse">
+    <button onclick="verifierReponse()">Valider</button>
+  </div>
+  
+  <p id="message"></p>
+  <button onclick="window.location.href='home.html'">Retour à l'accueil</button>
+  
+  <script src="script.js"></script>
+  <script src="niveau4.js"></script>
+</body>
+</html>
