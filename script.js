@@ -97,6 +97,13 @@ function startLevel(level) {
   if (level === 1) window.location.href = "niveau1.html";
   else if (level === 2) window.location.href = "niveau2.html";
   else if (level === 3) window.location.href = "niveau3.html";
+  else if (level === 4) window.location.href = "niveau4.html";
+  else if (level === 5) window.location.href = "niveau5.html";
+  else if (level === 6) window.location.href = "niveau6.html";
+  else if (level === 7) window.location.href = "niveau7.html";
+  else if (level === 8) window.location.href = "niveau8.html";
+  else if (level === 9) window.location.href = "niveau9.html";
+  else if (level === 10) window.location.href = "niveau10.html";
 }
 
 // Nouvelle clé de stockage
