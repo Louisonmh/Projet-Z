@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
       clearInterval(interval);
       message.textContent = "Temps écoulé ! Niveau échoué.";
       message.style.color = "red";
-      markLevelAsFailed(username, 5;
+      markLevelAsFailed(username, 5);
       setTimeout(() => window.location.href = "home.html", 2000);
     }
   }, 1000);
