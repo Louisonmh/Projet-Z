@@ -82,4 +82,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector("button[onclick='verifierReponse()']").disabled = true;
     document.querySelector("button[onclick='buyTime()']").disabled = true;
   }
+
+  window.validateLevel = function() {
+    clearInterval(interval);
+    updateProgress(username, 5);
+    updateCoins(username, 1);
+    
+    message.textContent = "Niveau validé ! +1 coins";
+    setTimeout(() => window.location.href = "home.html", 2000);
+  };
 });
